@@ -69,10 +69,8 @@ def main():
                 lambda x: '{}={}'.format(x[0], x[1]),
                 zip(columns, row),
             )
-            msg = '{};'.format('; '.join(list(record)))
-            args = ("user_data", logging.INFO, None, None, msg, None, None)
-            log_record = logging.LogRecord(*args)
-            info_logger.handle(log_record)
+            msg = '{}'.format('; '.join(list(record)))
+            info_logger.info(msg)
 
 
 class RedactingFormatter(logging.Formatter):
@@ -82,7 +80,7 @@ class RedactingFormatter(logging.Formatter):
     REDACTION = "***"
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
     FORMAT_FIELDS = ('name', 'levelname', 'asctime', 'message')
-    SEPARATOR = ";"
+    SEPARATOR = "; "
 
     def __init__(self, fields: List[str]):
         super(RedactingFormatter, self).__init__(self.FORMAT)
@@ -98,3 +96,4 @@ class RedactingFormatter(logging.Formatter):
 
 if __name__ == "__main__":
     main()
+
